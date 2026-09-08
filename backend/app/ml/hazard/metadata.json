@@ -1,0 +1,31 @@
+{
+    "features": [
+        "rainfall_24h_mm",
+        "rainfall_7d_mm",
+        "slope_deg",
+        "elevation_m",
+        "land_use",
+        "distance_to_river_m",
+        "soil_type",
+        "historical_landslide_count",
+        "historical_flood_count",
+        "built_up_percentage"
+    ],
+    "models": {
+        "flood": {
+            "file": "flood_model.pkl",
+            "target": "hazard_label"
+        },
+        "landslide": {
+            "file": "landslide_model.pkl",
+            "target": "hazard_label"
+        }
+    },
+    "classes": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ]
+}
