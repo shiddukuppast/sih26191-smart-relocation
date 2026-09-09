@@ -14,24 +14,20 @@ router = APIRouter(
 
 @router.post("/predict")
 def predict(request: HazardRequest):
-    """
-    Predict flood and landslide hazard for a given location.
-    """
 
     try:
-        # 1. Extract features using latitude and longitude
+        # Extract features from location
         features = extract_features(
             request.latitude,
             request.longitude
         )
 
-        # 2. Prepare features for the trained ML pipelines
+        # Prepare features for ML models
         prepared_features = prepare_features(features)
 
-        # 3. Run flood and landslide models
+        # Predict flood and landslide hazards
         prediction = predict_hazard(prepared_features)
 
-        # 4. Return the complete result
         return {
             "latitude": request.latitude,
             "longitude": request.longitude,
@@ -39,8 +35,14 @@ def predict(request: HazardRequest):
             **prediction
         }
 
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=str(e)
+            detail="Hazard prediction failed."
         )
