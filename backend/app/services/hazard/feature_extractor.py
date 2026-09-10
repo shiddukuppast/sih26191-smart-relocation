@@ -57,14 +57,14 @@ def extract_features(latitude: float, longitude: float) -> Dict:
         "rainfall_24h_mm": rainfall_features["rainfall_24h_mm"],
         "rainfall_7d_mm": rainfall_features["rainfall_7d_mm"],
 
-        "slope_deg": 25.0,
+        "slope_deg": 15.0,
         "elevation_m":elevation,
         "land_use": land_use,
         "distance_to_river_m": distance_to_river,
-        "soil_type": "clay",
-        "historical_landslide_count": 4,
-        "historical_flood_count": 3,
-        "built_up_percentage": 35.0
+        "soil_type": "Red Sandy Loam",
+        "historical_landslide_count": 0,
+        "historical_flood_count": 0,
+        "built_up_percentage": 65.0
     }
 
     return features

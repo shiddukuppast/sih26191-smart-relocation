@@ -100,5 +100,5 @@ def get_rainfall_features(
 
     return {
         "rainfall_24h_mm": rainfall_24h,
-        "rainfall_7d_mm": 350.0
+        "rainfall_7d_mm": 15.0
     }
