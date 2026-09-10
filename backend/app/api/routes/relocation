@@ -1,0 +1,51 @@
+from fastapi import APIRouter, HTTPException
+
+from app.schemas.relocation import (
+    RelocationPriorityRequest,
+    RelocationPriorityResponse,
+)
+
+from app.services.relocation.priority import (
+    calculate_relocation_priority,
+)
+
+
+router = APIRouter(
+    prefix="/relocation",
+    tags=["Relocation"],
+)
+
+
+@router.post(
+    "/priority",
+    response_model=RelocationPriorityResponse,
+)
+def relocation_priority(
+    request: RelocationPriorityRequest,
+):
+
+    try:
+
+        import pandas as pd
+
+        dataframe = pd.DataFrame(
+            request.records
+        )
+
+        result = calculate_relocation_priority(
+            dataframe
+        )
+
+        return RelocationPriorityResponse(
+            status="success",
+            data=result.to_dict(
+                orient="records"
+            ),
+        )
+
+    except Exception as exc:
+
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        )
